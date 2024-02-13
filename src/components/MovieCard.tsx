@@ -1,5 +1,5 @@
-import TrashCan from "./assets/trash-can-10416.svg";
-import { MovieObjectResponse } from "./types";
+import TrashCan from "../assets/trash-can-10416.svg";
+import { MovieObjectResponse } from "../types";
 import "./MovieCard.css";
 
 export default function MovieCard({
@@ -23,9 +23,14 @@ export default function MovieCard({
         <p>ID: {movie.id}</p>
         <p>Title: {movie.title}</p>
         <p>Overview: {movie.overview}</p>
-        <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
+        <p>
+          Genres:{" "}
+          {movie.genres && movie.genres.length > 0
+            ? movie.genres.map((genre) => genre.name).join(", ")
+            : "N/A"}
+        </p>
         <p>Release: {movie.release_date}</p>
-        <p>Rating: {movie.vote_average}/10</p>
+        <p>Rating: {movie.vote_average ? `${movie.vote_average}/10` : "N/A"}</p>
         <p>Duration: {movie.runtime} minutes</p>
       </div>
       <div className="actions">

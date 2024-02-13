@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-import FileRead from "./FileRead";
-import SearchSection from "./SearchSection";
-import { MoviesProvider } from "./movies-context";
-import MoviesList from "./MoviesList";
+import FileRead from "./components/FileRead";
+import ActionsSection from "./containers/ActionsSection";
+import { MoviesProvider } from "./contexts/movies-context";
+import MoviesList from "./containers/MoviesList";
+import { ApiProvider } from "./contexts/api-context";
 
 function App() {
   const [userEntries, setUserEntries] = useState<string[]>([]);
@@ -16,10 +17,12 @@ function App() {
         }}
       />
       {userEntries.length > 0 && (
-        <MoviesProvider>
-          <SearchSection entries={userEntries} />
-          <MoviesList />
-        </MoviesProvider>
+        <ApiProvider>
+          <MoviesProvider>
+            <ActionsSection entries={userEntries} key={userEntries.join("")} />
+            <MoviesList />
+          </MoviesProvider>
+        </ApiProvider>
       )}
     </>
   );

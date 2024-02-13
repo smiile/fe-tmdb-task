@@ -1,13 +1,21 @@
-import MovieCard from "./MovieCard";
-import { useMovies } from "./movies-context";
+import MovieCard from "../components/MovieCard";
+import { useMovies } from "../contexts/movies-context";
 import "./MoviesList.css";
 
 export default function MoviesList() {
   const {
-    state: { movies },
+    state: { movies, isLoading, isQueryPerformed },
     dispatch,
   } = useMovies();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   if (movies.length === 0) {
+    if (isQueryPerformed) {
+      return <div>No movies found</div>;
+    }
     return <></>;
   }
 

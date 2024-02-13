@@ -2,7 +2,7 @@ export interface MovieObjectResponse {
   id: number;
   title: string;
   overview: string;
-  genres: {
+  genres?: {
     id: number;
     name: string;
   }[];
