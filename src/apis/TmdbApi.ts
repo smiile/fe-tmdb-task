@@ -3,7 +3,9 @@ import {
   getMovieDetailsURL,
   getOptionsObjForGetRequests,
   getSearchURL,
-} from "../utils";
+} from "./utils";
+import { MovieObjectType } from "../types";
+import MovieObject from "../dtos/MovieObject";
 export default class TmdbApi {
   limiter: Bottleneck;
   constructor() {
@@ -18,7 +20,7 @@ export default class TmdbApi {
   }
 
   async getMovies(movieTitles: string[], language: string) {
-    const movies = await Promise.all(
+    const movies = (await Promise.all(
       Array.from(movieTitles).map((movieTitle) =>
         this.limiter.schedule(() =>
           fetch(
@@ -35,6 +37,22 @@ export default class TmdbApi {
                     getOptionsObjForGetRequests()
                   )
                     .then((response) => response.json())
+                    .then(
+                      (movie: MovieObjectType) =>
+                        // keeping only necessary data
+                        new MovieObject(
+                          movie.id,
+                          movie.title,
+                          movie.overview,
+                          movie.genres,
+                          movie.credits,
+                          movie.videos,
+                          movie.poster_path,
+                          movie.release_date,
+                          movie.vote_average,
+                          movie.runtime
+                        )
+                    )
                     .catch((err) => {
                       console.error(`error while fetching details: ${err}`);
                     })
@@ -42,10 +60,12 @@ export default class TmdbApi {
               }
               return null;
             })
-            .catch((err) => console.error(`error while fetching list: ${err}`))
+            .catch((err) => {
+              console.error(`error while fetching list: ${err}`);
+            })
         )
       )
-    );
+    )) as MovieObject[];
     return movies;
   }
 }

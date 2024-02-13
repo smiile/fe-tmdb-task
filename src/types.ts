@@ -10,7 +10,7 @@ export enum videoType {
   trailer = "Trailer",
 }
 
-export interface MovieObject {
+export interface MovieObjectType {
   id: number;
   title: string;
   overview: string;

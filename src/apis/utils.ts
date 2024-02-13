@@ -1,4 +1,4 @@
-import { readAccessToken, tmdbBaseURL } from "./constants";
+import { readAccessToken, tmdbBaseURL } from "../constants";
 
 export const getSearchURL = (movieTitle: string, language = "en-US") =>
   `${tmdbBaseURL}/search/movie?query=${encodeURIComponent(

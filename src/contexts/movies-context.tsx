@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MovieObject } from "../types";
+import MovieObject from "../dtos/MovieObject";
 
 type ActionResetState = { type: "resetState" };
 type ActionSetMovies = { type: "setMovies"; data: MovieObject[] };

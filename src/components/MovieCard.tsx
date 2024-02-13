@@ -1,13 +1,18 @@
 import TrashCan from "../assets/trash-can-10416.svg";
-import { MovieObject, departments, trailerSites, videoType } from "../types";
+import {
+  MovieObjectType,
+  departments,
+  trailerSites,
+  videoType,
+} from "../types";
 import "./MovieCard.css";
 
 export default function MovieCard({
   movie,
   handleDelete,
 }: {
-  movie: MovieObject;
-  handleDelete: (movie: MovieObject) => void;
+  movie: MovieObjectType;
+  handleDelete: (movie: MovieObjectType) => void;
 }) {
   const directors =
     movie.credits && movie.credits.crew && movie.credits.crew.length > 0
