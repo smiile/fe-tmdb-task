@@ -17,18 +17,21 @@ export default class TmdbApi {
     });
   }
 
-  async getMovies(movieTitles: string[]) {
+  async getMovies(movieTitles: string[], language: string) {
     const movies = await Promise.all(
       Array.from(movieTitles).map((movieTitle) =>
         this.limiter.schedule(() =>
-          fetch(getSearchURL(movieTitle), getOptionsObjForGetRequests())
+          fetch(
+            getSearchURL(movieTitle, language),
+            getOptionsObjForGetRequests()
+          )
             .then((response) => response.json())
             .then((jsonResponse) => {
               if (jsonResponse.total_results > 0) {
                 const movieId = jsonResponse.results[0].id;
                 return this.limiter.schedule(() =>
                   fetch(
-                    getMovieDetailsURL(movieId),
+                    getMovieDetailsURL(movieId, language),
                     getOptionsObjForGetRequests()
                   )
                     .then((response) => response.json())
