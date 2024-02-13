@@ -7,21 +7,25 @@ export default class MockApi {
     successCallback: { (): void },
     failureCallback: { (err: string): void }
   ) {
-    await fetch(saveMovieURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(movies),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`${response.status} ${response.statusText}`);
+    const postPromises = movies.map((movie) =>
+      fetch(saveMovieURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(movie),
+      })
+    );
+
+    Promise.all(postPromises)
+      .then((responses) => {
+        for (const response of responses) {
+          if (!response.ok) {
+            throw Error(`${response.status} ${response.statusText}`);
+          }
         }
         successCallback();
       })
-      .catch((err: Error) => {
-        failureCallback(err.message);
-      });
+      .catch((err: Error) => failureCallback(err.message));
   }
 }
