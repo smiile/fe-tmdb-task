@@ -1,10 +1,10 @@
 import * as React from "react";
-import { MovieObjectResponse } from "../types";
+import { MovieObject } from "../types";
 
 type ActionResetState = { type: "resetState" };
-type ActionSetMovies = { type: "setMovies"; data: MovieObjectResponse[] };
+type ActionSetMovies = { type: "setMovies"; data: MovieObject[] };
 type ActionInitiateLoading = { type: "initiateLoading" };
-type ActionDelete = { type: "deleteMovie"; movie: MovieObjectResponse };
+type ActionDelete = { type: "deleteMovie"; movie: MovieObject };
 type Action =
   | ActionSetMovies
   | ActionDelete
@@ -12,7 +12,7 @@ type Action =
   | ActionResetState;
 type Dispatch = (action: Action) => void;
 type State = {
-  movies: MovieObjectResponse[];
+  movies: MovieObject[];
   isLoading: boolean;
   isQueryPerformed: boolean;
 };

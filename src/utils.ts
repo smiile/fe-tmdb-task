@@ -6,7 +6,7 @@ export const getSearchURL = (movieTitle: string, language = "en-US") =>
   )}&language=${language}`;
 
 export const getMovieDetailsURL = (id: number, language = "en-US") =>
-  `${tmdbBaseURL}/movie/${id}?language=${language}`;
+  `${tmdbBaseURL}/movie/${id}?language=${language}&append_to_response=videos,credits`;
 
 export const getOptionsObjForGetRequests = () => ({
   method: "GET",

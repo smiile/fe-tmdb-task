@@ -25,9 +25,10 @@ export default class TmdbApi {
             .then((response) => response.json())
             .then((jsonResponse) => {
               if (jsonResponse.total_results > 0) {
+                const movieId = jsonResponse.results[0].id;
                 return this.limiter.schedule(() =>
                   fetch(
-                    getMovieDetailsURL(jsonResponse.results[0].id),
+                    getMovieDetailsURL(movieId),
                     getOptionsObjForGetRequests()
                   )
                     .then((response) => response.json())
