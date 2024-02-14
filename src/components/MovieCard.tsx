@@ -1,4 +1,3 @@
-import TrashCan from "../assets/trash-can-10416.svg";
 import {
   MovieObjectType,
   departments,
@@ -9,11 +8,14 @@ import "./MovieCard.css";
 
 export default function MovieCard({
   movie,
-  handleDelete,
+  handleClick,
 }: {
-  movie: MovieObjectType;
-  handleDelete: (movie: MovieObjectType) => void;
+  movie?: MovieObjectType;
+  handleClick: () => void;
 }) {
+  if (!movie) {
+    return <></>;
+  }
   const directors =
     movie.credits && movie.credits.crew && movie.credits.crew.length > 0
       ? movie.credits.crew
@@ -41,23 +43,26 @@ export default function MovieCard({
       : [];
   return (
     <div className="card">
-      <div className="cover">
-        <img
-          width={200}
-          height={300}
-          src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-          alt="Poster"
-        />
+      <div className="cover" onClick={handleClick}>
+        {movie.poster_path ? (
+          <img
+            width={200}
+            height={300}
+            src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+            alt="Poster"
+          />
+        ) : (
+          <img
+            width={200}
+            height={300}
+            src="https://placehold.co/200x300?text=Poster\nUnavailable"
+            alt="Poster"
+          />
+        )}
       </div>
       <div className="info">
-        <div>
-          <span className="label">ID:</span>
-          {movie.id}
-        </div>
-        <div>
-          <span className="label">Title:</span>
-          {movie.title}
-        </div>
+        <h2>{movie.title}</h2>
+
         <div>
           <span className="label">Overview:</span>
           {movie.overview}
@@ -101,14 +106,6 @@ export default function MovieCard({
             "N/A"
           )}
         </div>
-      </div>
-      <div className="actions">
-        <img
-          src={TrashCan}
-          width="20"
-          height="20"
-          onClick={() => handleDelete(movie)}
-        />
       </div>
     </div>
   );

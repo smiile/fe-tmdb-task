@@ -27,9 +27,9 @@ export default function FileRead({
   };
 
   return (
-    <div>
+    <>
       <label htmlFor="file">Choose a txt file </label>
       <input id="file" type="file" accept=".txt" onChange={handleFileChange} />
-    </div>
+    </>
   );
 }

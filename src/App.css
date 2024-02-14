@@ -1,4 +1,14 @@
+:root {
+  --section-gap: 0.5rem;
+}
+
 #root {
-  max-width: 1280px;
-  padding: 2rem;
+  width: 1280px;
+  padding: 1rem;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.file-read {
+  margin-bottom: var(--section-gap);
 }

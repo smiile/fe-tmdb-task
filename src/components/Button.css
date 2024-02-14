@@ -1,3 +1,6 @@
-.button {
-  padding: 0.1rem 0.3rem;
+.button,
+input[type="file"]::file-selector-button {
+  padding: 0.1rem 0.9rem;
+  font-size: 1rem;
+  border-radius: 6px;
 }

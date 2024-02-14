@@ -1,17 +1,21 @@
 .card {
   display: flex;
-  border-radius: 4px;
+  flex-direction: column;
+  width: 600px;
+  border-radius: 3px;
   background: #efcda0;
-  height: 300px;
+  padding: 1rem;
 
   .cover {
     img {
       display: block;
+      margin: 0 auto;
     }
   }
 
   .info {
     .label {
+      display: block;
       font-weight: bold;
       padding-right: 0.25rem;
     }
@@ -20,15 +24,5 @@
     flex-direction: column;
     padding: 0.5rem;
     overflow: auto;
-  }
-  .actions {
-    align-self: flex-end;
-    margin-bottom: 0.5rem;
-    display: block;
-    margin-right: 0.5rem;
-
-    img {
-      cursor: pointer;
-    }
   }
 }

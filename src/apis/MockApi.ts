@@ -17,7 +17,7 @@ export default class MockApi {
       })
     );
 
-    Promise.all(postPromises)
+    return Promise.all(postPromises)
       .then((responses) => {
         for (const response of responses) {
           if (!response.ok) {

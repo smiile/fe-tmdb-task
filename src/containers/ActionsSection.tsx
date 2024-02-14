@@ -2,6 +2,8 @@ import { useCallback, useState } from "react";
 import { useMovies } from "../contexts/movies-context";
 import Button from "../components/Button";
 import { useApi } from "../contexts/api-context";
+import "./ActionSection.css";
+import toast from "react-hot-toast";
 
 export default function ActionsSection({ entries }: { entries: string[] }) {
   const [entriesToQuery, setEntriesToQuery] = useState(() =>
@@ -26,64 +28,71 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
 
   const handleSave = useCallback(() => {
     setIsSaving(true);
-    mockApi.postMovies(
+    const promise = mockApi.postMovies(
       foundMovies,
       () => {
-        alert("Successfully saved!");
         setIsSaving(false);
       },
-      (err) => {
-        alert(`An error occurred ${err}`);
+      () => {
         setIsSaving(false);
       }
     );
+    toast.promise(promise, {
+      loading: "Saving...",
+      error: <b>An error occurred</b>,
+      success: <b>Movies saved successfully!</b>,
+    });
   }, [foundMovies, mockApi]);
 
   return (
-    <>
-      {entriesToQuery.map((movie, idx) => (
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={movie.checked}
-              onChange={(event) => {
-                const updatedEntries = [...entriesToQuery];
-                if (event.target.checked) {
-                  updatedEntries[idx].checked = true;
-                } else {
-                  updatedEntries[idx].checked = false;
-                }
-                setEntriesToQuery(updatedEntries);
-              }}
-            />{" "}
-            {movie.value}{" "}
-          </label>
-        </div>
-      ))}
-      {foundMovies.length === 0 ? (
-        <>
-          <span>Select language </span>
-          <select onChange={(event) => setLanguage(event.target.value)}>
-            <option value="en-US">English</option>
-            <option value="bg-BG">Bulgarian</option>
-            <option value="fr-FR">French</option>
-            <option value="pt-BR">Portuguese</option>
-          </select>
-          <Button onClick={handleSearch} disabled={isLoading}>
-            Search
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button onClick={handleSave} disabled={isSaving}>
-            Save
-          </Button>{" "}
-          <Button onClick={() => dispatch({ type: "resetState" })}>
-            Clear results
-          </Button>
-        </>
-      )}
-    </>
+    <div className="actions-section">
+      <div className="entries-list">
+        {entriesToQuery.map((movie, idx) => (
+          <div className="entry">
+            <label>
+              <input
+                type="checkbox"
+                checked={movie.checked}
+                onChange={(event) => {
+                  const updatedEntries = [...entriesToQuery];
+                  if (event.target.checked) {
+                    updatedEntries[idx].checked = true;
+                  } else {
+                    updatedEntries[idx].checked = false;
+                  }
+                  setEntriesToQuery(updatedEntries);
+                }}
+              />{" "}
+              {movie.value}{" "}
+            </label>
+          </div>
+        ))}
+      </div>
+      <div className="actions">
+        {foundMovies.length === 0 ? (
+          <>
+            <span>Select language </span>
+            <select onChange={(event) => setLanguage(event.target.value)}>
+              <option value="en-US">English</option>
+              <option value="bg-BG">Bulgarian</option>
+              <option value="fr-FR">French</option>
+              <option value="pt-BR">Portuguese</option>
+            </select>
+            <Button onClick={handleSearch} disabled={isLoading}>
+              Search
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button onClick={handleSave} disabled={isSaving}>
+              Save
+            </Button>{" "}
+            <Button onClick={() => dispatch({ type: "resetState" })}>
+              Clear results
+            </Button>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

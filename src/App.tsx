@@ -11,11 +11,14 @@ function App() {
 
   return (
     <>
-      <FileRead
-        onFileParsed={(result) => {
-          setUserEntries(result);
-        }}
-      />
+      <h1>The Movie Surfer</h1>
+      <div className="file-read">
+        <FileRead
+          onFileParsed={(result) => {
+            setUserEntries(result);
+          }}
+        />
+      </div>
       {userEntries.length > 0 && (
         <ApiProvider>
           <MoviesProvider>
