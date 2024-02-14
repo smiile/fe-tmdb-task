@@ -56,6 +56,7 @@ export default function MoviesList() {
         />
       ))}
       <Modal
+        closeTimeoutMS={200}
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={modalStyles}
