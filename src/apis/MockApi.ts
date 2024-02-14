@@ -26,6 +26,9 @@ export default class MockApi {
         }
         successCallback();
       })
-      .catch((err: Error) => failureCallback(err.message));
+      .catch((err: Error) => {
+        failureCallback(err.message);
+        throw err.message;
+      });
   }
 }

@@ -37,6 +37,7 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
         setIsSaving(false);
       }
     );
+
     toast.promise(promise, {
       loading: "Saving...",
       error: <b>An error occurred</b>,
