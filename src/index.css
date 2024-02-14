@@ -1,7 +1,13 @@
-* {
+*:not(button, select, input[type="file"]::file-selector-button) {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+button,
+select,
+input[type="file"]::file-selector-button {
+  font-size: 1rem;
 }
 
 a {
@@ -16,7 +22,6 @@ a:hover {
 body {
   display: flex;
   min-width: 320px;
-  min-height: 100vh;
   background: #ffc177;
 }
 

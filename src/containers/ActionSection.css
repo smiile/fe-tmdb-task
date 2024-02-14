@@ -8,16 +8,12 @@
     margin-bottom: calc(var(--section-gap) / 2);
 
     .entry {
-      margin-right: 1rem;
+      margin-right: 0.6rem;
     }
   }
 
   .actions {
     display: flex;
     gap: 8px;
-    select {
-      font-size: 1rem;
-      padding: 0.1rem 0.9rem;
-    }
   }
 }
