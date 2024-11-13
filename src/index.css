@@ -22,7 +22,7 @@ a:hover {
 body {
   display: flex;
   min-width: 320px;
-  background: #ffc177;
+  background: #ffebaf;
 }
 
 .ReactModal__Overlay {

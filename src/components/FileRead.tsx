@@ -10,8 +10,8 @@ export default function FileRead({
     const handeFileRead = () => {
       const result = (reader.result as string)
         .split("\n")
-        .filter((line) => line);
-      onFileParsed(result);
+        .filter((line) => line.trim());
+      onFileParsed([...new Set(result)]);
     };
 
     reader.addEventListener("load", handeFileRead);
@@ -29,7 +29,7 @@ export default function FileRead({
   return (
     <>
       <label htmlFor="file">Choose a txt file </label>
-      <input id="file" type="file" accept=".txt" onChange={handleFileChange} />
+      <input id="file" type="file" onChange={handleFileChange} />
     </>
   );
 }

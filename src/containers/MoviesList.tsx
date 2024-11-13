@@ -47,6 +47,7 @@ export default function MoviesList() {
     <div className="movies-list">
       {movies.map((movie) => (
         <MovieThumbnail
+          key={movie.id}
           movie={movie}
           handleClick={() => {
             setSelectedMovie(movie);

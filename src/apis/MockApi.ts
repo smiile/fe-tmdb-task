@@ -1,4 +1,4 @@
-import { saveMovieURL } from "../constants";
+import { saveMovieURL, surferIslandApiURL } from "../constants";
 import MovieObject from "../dtos/MovieObject";
 
 export default class MockApi {

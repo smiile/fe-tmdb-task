@@ -49,7 +49,7 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
     <div className="actions-section">
       <div className="entries-list">
         {entriesToQuery.map((movie, idx) => (
-          <div className="entry">
+          <div className="entry" key={movie.value}>
             <label>
               <input
                 type="checkbox"
