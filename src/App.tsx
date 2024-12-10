@@ -5,13 +5,14 @@ import ActionsSection from "./containers/ActionsSection";
 import { MoviesProvider } from "./contexts/movies-context";
 import MoviesList from "./containers/MoviesList";
 import { ApiProvider } from "./contexts/api-context";
+import Header from "./components/Header";
 
 function App() {
   const [userEntries, setUserEntries] = useState<string[]>([]);
 
   return (
     <>
-      <h1>The Movie Surfer</h1>
+      <Header />
       <div className="file-read">
         <FileRead
           onFileParsed={(result) => {

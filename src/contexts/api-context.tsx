@@ -1,13 +1,13 @@
 import * as React from "react";
 import TmdbApi from "../apis/TmdbApi";
-import MockApi from "../apis/MockApi";
+import SurferApi from "../apis/SurferApi";
 
 const ApiContext = React.createContext<
-  { tmdbApi: TmdbApi; mockApi: MockApi } | undefined
+  { tmdbApi: TmdbApi; surferApi: SurferApi } | undefined
 >(undefined);
 
 function ApiProvider({ children }: { children: React.ReactNode }) {
-  const value = { tmdbApi: new TmdbApi(), mockApi: new MockApi() };
+  const value = { tmdbApi: new TmdbApi(), surferApi: new SurferApi() };
 
   return <ApiContext.Provider value={value}>{children}</ApiContext.Provider>;
 }

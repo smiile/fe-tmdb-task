@@ -15,7 +15,7 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
     dispatch,
     state: { movies: foundMovies, isLoading },
   } = useMovies();
-  const { tmdbApi, mockApi } = useApi();
+  const { tmdbApi, surferApi } = useApi();
 
   const handleSearch = useCallback(async () => {
     dispatch({ type: "initiateLoading" });
@@ -28,7 +28,7 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
 
   const handleSave = useCallback(() => {
     setIsSaving(true);
-    const promise = mockApi.postMovies(
+    const promise = surferApi.postMovies(
       foundMovies,
       () => {
         setIsSaving(false);
@@ -43,7 +43,7 @@ export default function ActionsSection({ entries }: { entries: string[] }) {
       error: <b>An error occurred</b>,
       success: <b>Movies saved successfully!</b>,
     });
-  }, [foundMovies, mockApi]);
+  }, [foundMovies, surferApi]);
 
   return (
     <div className="actions-section">

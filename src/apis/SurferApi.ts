@@ -1,7 +1,7 @@
-import { saveMovieURL, surferIslandApiURL } from "../constants";
+import { saveMovieURL } from "../constants";
 import MovieObject from "../dtos/MovieObject";
 
-export default class MockApi {
+export default class SurferApi {
   async postMovies(
     movies: MovieObject[],
     successCallback: { (): void },
